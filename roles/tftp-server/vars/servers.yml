@@ -1,0 +1,17 @@
+---
+servers:
+  - hostname: "servera"
+    fqdnhostname: "servera.dell.example.com"
+    interface: "eth0"
+    ipv4addr: "172.25.250.10"
+    ipv4netmask: "255.255.255.0"
+    ipv4gateway: "172.25.250.254"
+    ipv4nameserver: "172.25.250.254"
+  - hostname: "serverb"
+    fqdnhostname: "serverb.dell.example.com"
+    interface: "eth0"
+    ipv4addr: "172.25.250.11"
+    ipv4netmask: "255.255.255.0"
+    ipv4gateway: "172.25.250.254"
+    ipv4nameserver: "172.25.250.254"
+

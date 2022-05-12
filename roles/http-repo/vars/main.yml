@@ -1,0 +1,4 @@
+---
+# vars file for http-repo
+mount_point: /mnt/install-repo
+file_name: "{{ mount_point }}/media.repo"

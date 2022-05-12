@@ -1,0 +1,19 @@
+---
+- name: Render kickstart files
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - vars/servers.yml
+  
+  tasks:
+
+  - name: Ensure kickstar dir exists
+    file:
+      path: /var/www/html/kickstart/{{ distro }}
+      state: directory
+
+  - name: Render kickstart.cfg
+    template:
+      src: templates/ks.j2
+      dest: /var/www/html/kickstart/{{ distro }}/{{ item.name }}.ks.cfg
+    loop: "{{ ansible_nodes }}"

@@ -1,0 +1,27 @@
+---
+# tasks file for http-repo
+- name: Install Apache httpd and firewalld
+  yum:
+    name: 
+      - httpd
+      - firewalld
+    state: present
+
+- name: Ensure httpd is enabled and started
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Ensure firewalld is enabled and started
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Open http firewall port
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+    immediate: true

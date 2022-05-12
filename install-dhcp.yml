@@ -1,0 +1,5 @@
+---
+- name: Install DHCP server
+  hosts: localhost
+  roles:
+    - dhcp-server

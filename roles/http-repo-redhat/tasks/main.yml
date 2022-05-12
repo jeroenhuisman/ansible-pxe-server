@@ -1,5 +1,5 @@
 ---
-# tasks file for http-repo
+# tasks file for http-repo-redhat
 - name: Ensure mount-point exists
   file:
     path: "{{ mount_point }}"

@@ -24,7 +24,7 @@
 
 - name: Find rpms for pxeboot
   find:
-    paths: /var/www/html/install-repo
+    paths: /var/www/html/repos
     patterns:
       - "shim-x64*.rpm"
       - "grub2-efi-x64*.rpm"

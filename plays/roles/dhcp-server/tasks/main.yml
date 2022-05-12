@@ -1,0 +1,23 @@
+---
+# tasks file for dhcp-server
+- name: Ensure dhcp-server is installed
+  yum:
+    name: dhcp-server
+    state: present
+
+- name: Configure dhcp-server
+  template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: 0511
+  notify: Restart dhcpd
+
+- name: Ensure dhcp-server is enabled and started
+  service:
+    name: dhcpd
+    state: started
+    enabled: yes
+
+

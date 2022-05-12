@@ -1,0 +1,53 @@
+#version=RHEL8
+# Use graphical install
+graphical
+
+repo --name="AppStream" --baseurl=http://{{ reposerver }}:{{ http_port }}/install-repo/{{ distro }}/AppStream
+
+%packages
+@^server-product-environment
+kexec-tools
+
+%end
+
+# Keyboard layouts
+keyboard --xlayouts='gb'
+# System language
+lang en_GB.UTF-8
+
+# Network information
+network  --device={{ item.interface }} --hostname={{ item.name }}.{{ domain_name }}--bootproto=static --ip={{ item.ip }} --netmask={{ item.mask }} --gateway={{ item.gateway }} --nameserver={{ item.nameserver }} --ipv6=auto --activate
+
+# Use network installation
+url --url="http://{{ reposerver }}:{{http_port}}/install-repo/{{ distro }}"
+
+# Run the Setup Agent on first boot
+firstboot --disable
+
+ignoredisk --only-use=sda
+autopart
+# Partition clearing information
+clearpart --all --initlabel
+
+# System timezone
+timezone Europe/London --isUtc
+
+# Root password
+rootpw --iscrypted $6$LDTVG46/lS0V3I7G$xI/6ij4RjeUlzhLhgp6Zv7d0et3k.Oqtw5BAQo2qQkUjYF2YZz78Y6a1LT64BIuApFrQcIf5b63H9Z0S9K2kA1
+auth --passalgo=sha256 --useshadow
+
+firewall --enabled --ssh
+selinux --enforcing
+bootloader --append="rhgb quiet crashkernel=auto"
+skipx
+reboot
+
+%addon com_redhat_kdump --enable --reserve-mb='auto'
+
+%end
+
+%anaconda
+pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+%end

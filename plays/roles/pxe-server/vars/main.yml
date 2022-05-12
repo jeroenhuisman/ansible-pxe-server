@@ -1,0 +1,34 @@
+---
+domain_name: dell.example.com
+http_port: 80
+reposerver: 172.25.250.254
+ansible_nodes:
+- name: servera
+  interface: eth0
+  os: centos
+  ip: 172.25.250.10
+  mask: 255.255.255.0
+  gateway: 255.255.255.0
+  nameserver: 172.25.250.254
+- name: serverb
+  interface: eth0
+  os: centos
+  ip: 172.25.250.11
+  mask: 255.255.255.0
+  gateway: 255.255.255.0
+  nameserver: 172.25.250.254
+- name: serverc
+  interface: eth0
+  os: centos
+  ip: 172.25.250.12
+  mask: 255.255.255.0
+  gateway: 255.255.255.0
+  nameserver: 172.25.250.254
+- name: serverd
+  interface: eth0
+  os: centos
+  ip: 172.25.250.13
+  mask: 255.255.255.0
+  gateway: 255.255.255.0
+  nameserver: 172.25.250.254
+

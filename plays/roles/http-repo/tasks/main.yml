@@ -1,0 +1,56 @@
+---
+# tasks file for http-repo
+- name: Ensure mount-point exists
+  file:
+    path: "{{ mount_point }}"
+    state: directory
+
+- name: Ensure installation media is mounted
+  mount:
+    path: "{{ mount_point }}"
+    src: /dev/cdrom
+    fstype: iso9660
+    opts: ro,noauto
+    state: mounted
+
+- name: Checking {{ file_name }} exists
+  stat:
+    path: "{{ file_name }}"
+  register: stat_result
+  failed_when: stat_result is undefined
+
+- name: Set distro name
+  set_fact:
+    distro_full_name: "{{ lookup('ini', 'name section=InstallMedia file={{ file_name }}') }}"
+
+- name: set distro short name centos
+  set_fact:
+    distro: "centos"
+  when: distro_full_name is search 'CentOS'
+
+- name: set distro short name redhat
+  set_fact:
+    distro: "redhat"
+  when: distro_full_name is search 'Red Hat Enterprise Linux 8'
+
+- name: Ensure repo dir exists
+  file:
+    path: "/var/www/html/install-repo/{{ distro }}"
+    state: directory
+
+- name: Ensure files from installation media are copied to html repo
+  copy:
+    src: /mnt/install-repo/
+    dest: "/var/www/html/install-repo/{{ distro }}"
+
+- name: Ensure kickstart dir exists
+  file:
+    path: /var/www/html/kickstart/{{ distro }}
+    state: directory
+
+- name: Render kickstart.cfg
+  template:
+    src: ks.j2
+    dest: /var/www.html/kickstart/{{ item.os }}/{{ item.name }}.ks.cfg
+  loop: "{{ ansible_nodes }}"
+

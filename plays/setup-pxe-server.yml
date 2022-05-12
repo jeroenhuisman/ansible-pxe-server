@@ -1,0 +1,5 @@
+---
+- name: Setup PXE server
+  hosts: localhost
+  roles:
+    - pxe-server

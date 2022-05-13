@@ -1,0 +1,11 @@
+zone "huisman.local" IN {
+	type master;
+	file "/etc/db.huisman.local.zone";
+
+};
+
+# zone "250.25.172.in-addr.arpa" IN {
+#	type master;
+#	file "_huisman.local.rzone_";
+#};
+

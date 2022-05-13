@@ -23,34 +23,29 @@
   set_fact:
     distro_full_name: "{{ lookup('ini', 'name section=InstallMedia file={{ file_name }}') }}"
 
+- name: Debug display distro_full_name
+  debug:
+    msg: "{{ distro_full_name }}"
+
 - name: set distro short name redhat
   set_fact:
     distro: "redhat"
   when: distro_full_name is search 'Red Hat Enterprise Linux 8'
 
+- name: Debug display distro shortname
+  debug:
+    msg: "{{ distro }}"
+
 - name: Fail when media mounted is not Red Hat Enteprise Linux
   debug:
     msg: "Installation media mismatch, expected Red Hat Enterprise Linux. Media found is {{ distro_full_name }}"
-  failed_when: distro not defined
+  failed_when: distro is undefined
 
 - name: Ensure repo dir exists
   file:
     path: "{{ repo_base_dir }}/{{ distro }}"
     state: directory
-
 - name: Ensure files from installation media are copied to html repo
   copy:
     src: "{{ mount_point }}"
     dest: "{{ repo_base_dir }}/{{ distro }}"
-
-- name: Ensure kickstart dir exists
-  file:
-    path: "{{ kickstart_dir }}/{{ distro }}"
-    state: directory
-
-- name: Render kickstart.cfg
-  template:
-    src: ks.j2
-    dest: "{{ kickstart_base_dir }}/{{ distro }}/{{ item.name }}.ks.cfg"
-  loop: "{{ ansible_nodes }}"
-

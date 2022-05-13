@@ -1,0 +1,23 @@
+---
+# tasks file for generate-kickstart
+- name: Checking {{ repo_base_dir }}/{{ distro }}/{{ file_name }} exists
+  stat:
+    path: "{{ repo_base_dir }}/{{ distro }}/{{ file_name }}"
+  register: stat_result
+  failed_when: stat_result is undefined
+
+- name: Set distro name
+  set_fact:
+    distro_full_name: "{{ lookup('ini', 'name section=InstallMedia file={{ file_name }}') }}"
+ 
+- name: Ensure kickstart dir exists
+  file:
+    path: "{{ kickstart_dir }}/{{ distro }}"
+    state: directory
+
+- name: Render kickstart.cfg
+  template:
+    src: ks.j2
+    dest: "{{ kickstart_base_dir }}/{{ distro }}/{{ item.name }}.ks.cfg"
+  loop: "{{ ansible_nodes }}"
+

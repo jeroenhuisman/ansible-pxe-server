@@ -31,7 +31,7 @@
 - name: Fail when media mounted is not CentOS 8 Stream
   debug:
     msg: "Installation media mismatch, expected CentOS 8 Stream. Media found is {{ distro_full_name }}"
-  failed_when: distro not defined
+  failed_when: distro is undefined
 
 - name: Ensure repo dir exists
   file:

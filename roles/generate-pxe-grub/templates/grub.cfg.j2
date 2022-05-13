@@ -1,0 +1,8 @@
+{% if ansible_nodes is defined %}
+{% for node in ansible_nodes %}
+menuentry '{{ node.os }} on {{ node.name }}' --class fedora --class gnu-linux --class gnu --class os {
+  linuxefi images/{{ node.os }}/vmlinuz ip=dhcp inst.ks=http://{{ reposerver }}:{{ http_port }}/kickstart/{{ node.os }}/{{ node.name }}.ks.cfg
+  initrdefi images/{{ node.os }}/initrd.img
+}
+{% endfor %}
+{% endif %}

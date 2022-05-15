@@ -2,7 +2,7 @@
 # Use graphical install
 graphical
 
-repo --name="AppStream" --baseurl=http://{{ reposerver }}:{{ http_port }}/install-repo/{{ distro }}/AppStream
+repo --name="AppStream" --baseurl=http://{{ reposerver }}:{{ http_port }}/repos/{{ distro }}/AppStream
 
 %packages
 @^server-product-environment
@@ -13,13 +13,14 @@ kexec-tools
 # Keyboard layouts
 keyboard --xlayouts='gb'
 # System language
-lang en_GB.UTF-8
 
+lang en_GB.UTF-8
+ 
 # Network information
-network  --device={{ item.interface }} --hostname={{ item.name }}.{{ domain_name }}--bootproto=static --ip={{ item.ip }} --netmask={{ item.mask }} --gateway={{ item.gateway }} --nameserver={{ item.nameserver }} --ipv6=auto --activate
+network  --device={{ item.interface }} --hostname={{ item.name }}.{{ domain_name }} --bootproto=static --ip={{ item.ip }} --netmask={{ item.mask }} --gateway={{ item.gateway }} --nameserver={{ item.nameserver }} --ipv6=auto --activate
 
 # Use network installation
-url --url="http://{{ reposerver }}:{{http_port}}/install-repo/{{ distro }}"
+url --url="http://{{ reposerver }}:{{http_port}}/repos/{{ distro }}"
 
 # Run the Setup Agent on first boot
 firstboot --disable
@@ -33,8 +34,8 @@ clearpart --all --initlabel
 timezone Europe/London --isUtc
 
 # Root password
-rootpw --iscrypted $6$LDTVG46/lS0V3I7G$xI/6ij4RjeUlzhLhgp6Zv7d0et3k.Oqtw5BAQo2qQkUjYF2YZz78Y6a1LT64BIuApFrQcIf5b63H9Z0S9K2kA1
-auth --passalgo=sha256 --useshadow
+rootpw --iscrypted $6$SRBcMlVzw0z9r/9C$NFO8NActAn7wsNVrx7/GROi7PkGBEN7neQlMQhIbpQthzQIjEmFf8KvSPphxS4xM3IEUzN71uhpQXIdg4SMv91 
+auth --passalgo=sha512 --useshadow
 
 firewall --enabled --ssh
 selinux --enforcing

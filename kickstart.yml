@@ -1,0 +1,7 @@
+---
+- name: Update kickstart files
+  hosts: localhost
+  vars_files:
+    - vars/defaults.yml
+  roles:
+    - generate-kickstart

@@ -1,6 +1,2 @@
 ---
 # vars file for generate-kickstart
-repo_base_dir: /var/www/html/repos/
-file_name: media.repo
-distro: redhat
-kickstart_dir: /var/www/html/kickstart

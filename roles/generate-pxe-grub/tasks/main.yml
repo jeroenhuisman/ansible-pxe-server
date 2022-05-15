@@ -1,7 +1,7 @@
 ---
 # tasks file for generate-pxe-grub
 - name: Render grub.cfg for UEFI boot
-    template:
+  template:
     src: grub.cfg.j2
     dest: /var/lib/tftpboot/uefi/grub.cfg
 

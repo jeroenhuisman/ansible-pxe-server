@@ -1,4 +1,0 @@
-zone "250.25.172.in-addr.arpa" {
-type master;
-file "/etc/db.huisman.local.rzone";
-};

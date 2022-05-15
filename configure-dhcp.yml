@@ -1,0 +1,7 @@
+---
+- name: Configure dhcp server
+  hosts: localhost
+  vars_files:
+    - vars/defaults.yml
+  roles: 
+    - configure-dhcp-server

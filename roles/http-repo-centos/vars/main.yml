@@ -1,5 +1,0 @@
----
-# vars file for http-repo
-mount_point: /mnt/install-media
-repo_base_dir: /var/www/html/repos/
-file_name: "{{ mount_point }}/media.repo"

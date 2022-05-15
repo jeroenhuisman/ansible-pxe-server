@@ -1,0 +1,8 @@
+---
+- name: Install all required packages for PXE Server
+  hosts: localhost 
+  roles:
+    - http-server
+    - tftp-server
+    - dns-server
+    - dhcp-server

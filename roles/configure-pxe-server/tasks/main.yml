@@ -1,5 +1,15 @@
 ---
 # tasks file for tftp-server
+- name: Checking {{ repo_file }} exists
+  stat:
+    path: "{{ repo_file }}"
+  register: stat_result
+  failed_when: stat_result is undefined
+
+- name: Set distro name
+  set_fact:
+    distro_full_name: "{{ lookup('ini', 'name section=InstallMedia file={{ repo_file }}') }}"
+
 - name: Ensure tftp boot directories exists
   file:
     path: "{{ item }}"
@@ -31,7 +41,7 @@
     recurse: yes
     excludes:
       - "*cdboot*"
-      - "*modukes*"
+      - "*modules*"
   register: rpms_to_extract
 
 - name: Ensure temp location for extraction exists
@@ -70,7 +80,7 @@
 - name: Copy EFI files
   copy:
     src: "{{ item.path }}"
-    dest: "/var/lib/tftpboot/uefi/{{ distro }}"
+    dest: "/var/lib/tftpboot/uefi"
     owner: root
     group: root
     mode: 0755
@@ -87,7 +97,7 @@
 
 - name: Find vmlinuz and initrd.imge
   find:
-    path: "/var/www/html/install-repo/{{ distro }}/images/"
+    path: "{{ repo_base_dir }}/{{ distro }}/images/"
     patterns:
       - "initrd.img"
       - "vmlinuz"
@@ -103,3 +113,8 @@
     mode: 0755
   loop: "{{ boot_files.files }}"
   when: boot_files is defined
+
+- name: Render grub.cfg for UEFI boot
+  template:
+    src: grub.cfg.j2
+    dest: /var/lib/tftpboot/uefi/grub.cfg

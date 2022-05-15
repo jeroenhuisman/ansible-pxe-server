@@ -1,2 +1,10 @@
 ---
 # tasks file for configure-dhcp-server
+- name: Configure dhcp-server
+  template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: 0511
+  notify: Restart dhcpd

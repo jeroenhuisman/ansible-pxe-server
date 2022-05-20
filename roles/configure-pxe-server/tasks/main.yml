@@ -18,8 +18,8 @@
     group: root
     mode: 0775
   loop:
-    - /var/lib/tftpboot/uefi
-    - /var/lib/tftpboot/pxelinux
+    - "{{ uefi_tftp_dir }}"
+    - "{{ pxe_tftp_dir }}"
  
 - name: Create temp directory for extracting boot files
   file: 
@@ -34,7 +34,7 @@
 
 - name: Find rpms for pxeboot
   find:
-    paths: "/var/www/html/repos/{{ distro }}"
+    paths: "{{ repo_base_dir}}/{{ distro }}"
     patterns:
       - "shim-x64*.rpm"
       - "grub2-efi-x64*.rpm"
@@ -68,7 +68,7 @@
     group: root
     mode: 0775
   loop:
-    - "/var/lib/tftpboot/uefi/{{ distro }}"
+    - "{{ uefi_tftp_dir }}/{{ distro }}"
     - "/tmp/pxeboot"
 
 - name: Find EFI files
@@ -80,7 +80,7 @@
 - name: Copy EFI files
   copy:
     src: "{{ item.path }}"
-    dest: "/var/lib/tftpboot/uefi"
+    dest: "{{ uefi_tftp_dir }}"
     owner: root
     group: root
     mode: 0755
@@ -89,7 +89,7 @@
 
 - name: Ensure directory for kernel and initrd.img exists
   file:
-    path: "/var/lib/tftpboot/images/{{ distro }}"
+    path: "{{ tftp_base_dir }}/images/{{ distro }}"
     state: directory
     owner: root
     group: root
@@ -107,7 +107,7 @@
 - name: Copy boot_files
   copy:
     src: "{{ item.path }}"
-    dest: "/var/lib/tftpboot/images/{{ distro }}"
+    dest: "{{ tftp_base_dir }}/images/{{ distro }}"
     owner: root
     group: root
     mode: 0755
@@ -117,4 +117,4 @@
 - name: Render grub.cfg for UEFI boot
   template:
     src: grub.cfg.j2
-    dest: /var/lib/tftpboot/uefi/grub.cfg
+    dest: "{{ uefi_tftp_dir }}/grub.cfg"

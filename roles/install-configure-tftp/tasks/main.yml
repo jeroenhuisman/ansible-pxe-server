@@ -1,0 +1,28 @@
+---
+# tasks file for install-configure-tftp
+- name: Ensure tfpt-server package and firewalld are installed
+  yum:
+    name:
+    - tftp-server
+    - firewalld
+    state: present
+
+- name: Ensure firewalld is enabled and started
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Ensure tftp-socket is enabled and started
+  systemd:
+    name: tftp.socket
+    state: started
+    enabled: true
+
+- name: Ensure tftp firewall port is open
+  firewalld:
+    service: tftp
+    state: enabled
+    permanent: yes
+    immediate: true
+

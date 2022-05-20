@@ -1,0 +1,28 @@
+---
+# tasks file for install-configure-http
+- name: Ensure httpd and firewalld packages are installed
+  yum:
+    name: 
+    - httpd
+    - firewalld
+    state: present
+
+- name: Ensure http is started and enabled
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Ensure firewalld is enabled and started
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Ensure firewalld allows http access
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+    immediate: yes
+

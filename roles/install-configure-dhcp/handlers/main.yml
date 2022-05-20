@@ -1,5 +1,5 @@
 ---
-# handlers file for configure-dhcp-server
+# handlers file for install-configure-dhcp
 - name: Restart dhcpd
   service:
     name: dhcpd

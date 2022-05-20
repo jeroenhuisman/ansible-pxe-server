@@ -1,7 +1,0 @@
----
-- name: Generate grub.cfg for pxe boot
-  vars_files: 
-    - vars/defaults.yml
-  hosts: localhost
-  roles:
-    - configure-pxe-server

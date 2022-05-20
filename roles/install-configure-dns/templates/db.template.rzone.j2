@@ -1,0 +1,12 @@
+$ORIGIN {{ ipv4reverse }}.in-addr.arpa.
+$TTL 1D
+@	IN SOA	{{ ansible_hostname }}.{{ domain_name }}. root (
+					2021120801	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+		IN 	NS	{{ ansible_hostname }}.{{ domain_name }}.
+{% for servers in ansible_nodes %}
+	{{ servers.ip[(ipv4reverse | length)+1:] }}	IN	PTR	{{ servers.name }}.{{ domain_name }}
+{% endfor %}

@@ -1,0 +1,24 @@
+---
+- ansible_nodes:
+  - name: servera
+    interface: eth0
+    os: redhat
+    ip: 172.25.250.10
+  - name: serverb
+    interface: eth0
+    os: redhat
+    ip: 172.25.250.11
+  - name: serverc
+    interface: eth0
+    os: redhat
+    ip: 172.25.250.12
+  - name: serverd
+    interface: eth0
+    os: redhat
+    ip: 172.25.250.13
+  - name: servere
+    interface: eth0
+    os: redhat
+    ip: 172.25.250.14
+
+

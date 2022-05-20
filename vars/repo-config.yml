@@ -1,0 +1,13 @@
+---
+- distro: redhat
+- html_dir: /var/www/html
+- repo_base_dir: "{{ html_dir }}/repos"
+- webserver_url: "http://{{ reposerver }}:{{ http_port }}"
+- repo_url: "{{ webserver_url }}/repos"
+- tftp_base_dir: "/var/lib/tftpboot"
+- uefi_tftp_dir: "/var/lib/tftpboot/uefi"
+- pxe_tftp_dir: "/var/lib/tftpboot/pxelinux"
+- kickstart_dir: "{{ html_dir }}/kickstart/{{ distro }}"
+- repo_file: "{{ repo_base_dir }}/{{ distro }}/media.repo"
+- http_port: 80
+- reposerver: 172.25.250.254

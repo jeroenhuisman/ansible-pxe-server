@@ -2,7 +2,7 @@
 # Use graphical install
 graphical
 
-repo --name="AppStream" --baseurl=http://{{ reposerver }}:{{ http_port }}/repos/{{ distro }}/AppStream
+repo --name="AppStream" --baseurl={{ repo_url }}/{{ distro }}/AppStream
 
 %packages
 @^server-product-environment
@@ -17,10 +17,10 @@ keyboard --xlayouts='gb'
 lang en_GB.UTF-8
  
 # Network information
-network  --device={{ item.interface }} --hostname={{ item.name }}.{{ domain_name }} --bootproto=static --ip={{ item.ip }} --netmask={{ item.mask }} --gateway={{ item.gateway }} --nameserver={{ item.nameserver }} --ipv6=auto --activate
+network  --device={{ item.interface }} --hostname={{ item.name }}.{{ domain_name }} --bootproto=static --ip={{ item.ip }} --netmask={{ ipv4netmask }} --gateway={{ ipv4gateway }} --nameserver={{ ipv4nameserver }} --ipv6=auto --activate
 
 # Use network installation
-url --url="http://{{ reposerver }}:{{http_port}}/repos/{{ distro }}"
+url --url="{{ repo_url }}/{{ distro }}"
 
 # Run the Setup Agent on first boot
 firstboot --disable
@@ -51,4 +51,12 @@ reboot
 pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
 pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
 pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+%end
+
+
+%post
+/bin/mkdir -p /root/.ssh
+/bin/curl {{ webserver_url }}/postinstall/authorized_keys > /root/.shh/authorized_keys
+/bin/chmod 0700 /root/.ssh
+/bin/chmod 0600 /root/.ssh/authorized_keys
 %end

@@ -1,0 +1,4 @@
+zone "{{ ipv4reverse }}.in-addr.arpa" {
+type master;
+file "/etc/named/db.{{ domain_name }}.rzone";
+};

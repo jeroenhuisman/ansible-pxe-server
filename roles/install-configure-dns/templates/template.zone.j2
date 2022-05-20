@@ -1,0 +1,5 @@
+zone "{{ domain_name }}" IN {
+	type master;
+	file "/etc/named/db.{{ domain_name }}.zone";
+
+};

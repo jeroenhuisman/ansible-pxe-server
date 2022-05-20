@@ -1,0 +1,29 @@
+---
+# tasks file for install-configure-dhcp
+- name: Install dhcp-server and firewalld package
+  yum:
+    name: 
+      - dhcp-server
+      - firewalld
+    state: present
+
+- name: Ensure dhcp-server is enabled at boot
+  service:
+    name: dhcpd
+    enabled: yes
+    
+- name: Enable firewall ports for dhcp
+  firewalld:
+    service: dhcp
+    state: enabled
+    permanent: yes
+    immediate: yes
+
+- name: Configure dhcp-server
+  template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: 0511
+  notify: Restart dhcpd

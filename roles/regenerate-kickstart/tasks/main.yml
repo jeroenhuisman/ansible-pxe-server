@@ -1,5 +1,5 @@
 ---
-# tasks file for generate-kickstart
+# tasks file for regenerate-kickstart
 - name: Checking {{ repo_file }} exists
   stat:
     path: "{{ repo_file }}"

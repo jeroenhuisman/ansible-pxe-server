@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Copy Installation repository from media to Apache webdir.
 
 Requirements
 ------------

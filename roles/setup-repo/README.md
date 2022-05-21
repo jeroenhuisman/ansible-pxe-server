@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Copy Installation repository from media to Apache webdir.
+Copy installation repository from media to Apache webdir.
 
 Requirements
 ------------

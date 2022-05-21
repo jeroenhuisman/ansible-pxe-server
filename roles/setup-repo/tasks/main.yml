@@ -28,3 +28,6 @@
   synchronize:
     src: /mnt/redhat/
     dest: "{{ repo_base_dir }}/{{ distro }}"
+    archive: false
+    times: no
+    recursive: true

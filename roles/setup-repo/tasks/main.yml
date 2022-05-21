@@ -5,7 +5,7 @@
     path: /mnt/redhat
     src: /dev/cdrom
     fstype: iso9660
-    opts: ro, noauto
+    opts: ro,noauto
     state: mounted
 
 - name: Validate installation media

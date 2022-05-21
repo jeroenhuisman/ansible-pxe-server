@@ -1,8 +1,12 @@
 ---
 # tasks file for setup-repo
+- name: Ensure directory for mounting media exists
+  file: "/mnt/{{ distro }}"
+  state: directory
+
 - name: Ensure installation media is mounted
   mount:
-    path: /mnt/redhat
+    path: "/mnt/{{ distro }}"
     src: /dev/cdrom
     fstype: iso9660
     opts: ro,noauto
@@ -14,11 +18,6 @@
   register: stat_result
   failed_when: stat_result is undefined
 
-- name: Ensure mount dir exists
-  file:
-    path: /mnt/redhat
-    state: directory
-    
 - name: Ensure repo dir exists
   file:
     path: "{{ repo_base_dir }}/{{ distro }}"
@@ -26,5 +25,5 @@
 
 - name: Copy installation media to webdir
   copy:
-    src: /mnt/redhat/
+    src: "/mnt/{{ distro }}/"
     dest: "{{ repo_base_dir }}/{{ distro }}"

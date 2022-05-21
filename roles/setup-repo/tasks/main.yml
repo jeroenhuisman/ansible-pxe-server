@@ -26,9 +26,12 @@
 
 - name: Copy installation media to webdir
   synchronize:
-    dest: /mnt/redhat/
-    src: "{{ repo_base_dir }}/{{ distro }}"
+    src: /mnt/redhat/
+    dest: "{{ repo_base_dir }}/{{ distro }}"
+    mode: pull
+    compress: false
     archive: false
+    perms: no
     times: no
     recursive: true
     rsync_path: "sudo rsync"

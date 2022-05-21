@@ -25,15 +25,6 @@
     state: directory
 
 - name: Copy installation media to webdir
-  synchronize:
+  copy:
     src: /mnt/redhat/
     dest: "{{ repo_base_dir }}/{{ distro }}"
-    mode: pull
-    compress: no
-    archive: no
-    perms: no
-    times: no
-    recursive: yes
-  remote_user: root
-  become: no
-  

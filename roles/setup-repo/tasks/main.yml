@@ -18,6 +18,10 @@
   file:
     path: /mnt/redhat
     state: directory
+    
+- name: Ensure repo dir exists
+  file:
+    path: "{{ repo_base_dir }}/{{ distro }}"
 
 - name: Copy installation media to webdir
   synchronize:

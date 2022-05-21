@@ -33,5 +33,4 @@
     archive: false
     perms: no
     times: no
-    recursive: true
-    rsync_path: "sudo rsync"
+  

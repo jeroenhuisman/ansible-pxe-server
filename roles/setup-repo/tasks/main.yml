@@ -20,6 +20,6 @@
     state: directory
 
 - name: Copy installation media to webdir
-  copy:
+  synchronize:
     src: /mnt/redhat/
     dest: "{{ repo_base_dir }}/{{ distro }}"

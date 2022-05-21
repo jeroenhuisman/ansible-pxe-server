@@ -33,4 +33,5 @@
     archive: false
     perms: no
     times: no
+    recursive: true
   

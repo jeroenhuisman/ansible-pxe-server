@@ -1,5 +1,6 @@
 - name: Bootstrap for SSH known host keys.
   hosts: all
+  remote_user: root
   gather_facts: no  # gather facts AFTER the host key has been accepted instead
 
   tasks:

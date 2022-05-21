@@ -22,6 +22,7 @@
 - name: Ensure repo dir exists
   file:
     path: "{{ repo_base_dir }}/{{ distro }}"
+    state: directory
 
 - name: Copy installation media to webdir
   synchronize:

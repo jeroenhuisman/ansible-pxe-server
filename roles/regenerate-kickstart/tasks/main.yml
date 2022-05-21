@@ -28,8 +28,8 @@
 
 - name: Copy authorized_key to for kickstart
   copy:
-    src: /home/ansible/.ssh/authorized_keys
-    dest: "{{ post_setup_dir }}"
+    content: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_rsa.pub') }}
+    dest: "{{ post_setup_dir }}/authorized_keys"
     mode: 0644
     owner: root
     group: root

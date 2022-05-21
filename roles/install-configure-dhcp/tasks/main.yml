@@ -30,5 +30,5 @@
   
 - name: Ensure dhcp-server is started
   service:
-    name: dhcp
+    name: dhcpd
     state: started

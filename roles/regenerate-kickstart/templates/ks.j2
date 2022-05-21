@@ -55,8 +55,8 @@ pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
 
 
 %post
-/bin/mkdir -p /root/.ssh
-/bin/curl {{ webserver_url }}/postinstall/authorized_keys > /root/.shh/authorized_keys
-/bin/chmod 0700 /root/.ssh
-/bin/chmod 0600 /root/.ssh/authorized_keys
+/usr/bin/mkdir -p /root/.ssh
+/usr/bin/curl {{ webserver_url }}/postinstall/authorized_keys > /root/.shh/authorized_keys
+/usr/bin/chmod 0700 /root/.ssh
+/usr/bin/chmod 0600 /root/.ssh/authorized_keys
 %end

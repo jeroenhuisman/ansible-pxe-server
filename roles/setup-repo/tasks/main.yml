@@ -14,6 +14,11 @@
   register: stat_result
   failed_when: stat_result is undefined
 
+- name: Ensure mount dir exists
+  file:
+    path: /mnt/redhat
+    state: directory
+
 - name: Copy installation media to webdir
   copy:
     src: /mnt/redhat

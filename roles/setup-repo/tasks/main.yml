@@ -22,4 +22,4 @@
 - name: Copy installation media to webdir
   copy:
     src: /mnt/redhat/
-    dest: "{{ repo_base_dir }}/"
+    dest: "{{ repo_base_dir }}/{{ distro }}"

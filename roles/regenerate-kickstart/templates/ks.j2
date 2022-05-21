@@ -31,7 +31,7 @@ autopart
 clearpart --all --initlabel
 
 # System timezone
-timezone Europe/London --isUtc
+timezone {{ time_zone }} --utc
 
 # Root password
 rootpw --iscrypted $6$SRBcMlVzw0z9r/9C$NFO8NActAn7wsNVrx7/GROi7PkGBEN7neQlMQhIbpQthzQIjEmFf8KvSPphxS4xM3IEUzN71uhpQXIdg4SMv91 

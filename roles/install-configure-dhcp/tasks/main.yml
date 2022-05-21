@@ -28,7 +28,7 @@
     mode: 0511
   notify: Restart dhcpd
   
-  - name: Ensure dhcp-server is started
-    service:
-      name: dhcp
-      state: started
+- name: Ensure dhcp-server is started
+  service:
+    name: dhcp
+    state: started

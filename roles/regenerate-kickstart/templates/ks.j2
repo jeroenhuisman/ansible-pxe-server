@@ -17,7 +17,7 @@ keyboard --xlayouts='gb'
 lang en_GB.UTF-8
  
 # Network information
-network  --device={{ item.interface }} --hostname={{ item.name }}.{{ domain_name }} --bootproto=static --ip={{ item.ip }} --netmask={{ ipv4netmask }} --gateway={{ ipv4gateway }} --nameserver={{ ipv4nameserver }} --ipv6=auto --activate
+network  --device={{ item.interface }} --hostname={{ item.name }}.{{ domain_name }} --bootproto=static --ip={{ item.ip }} --netmask={{ ipv4netmask }} --gateway={{ ipv4gateway }} --nameserver={{ ipv4nameserver }} --noipv6 --activate
 
 # Use network installation
 url --url="{{ repo_url }}/{{ distro }}"

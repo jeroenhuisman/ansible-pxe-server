@@ -21,3 +21,16 @@
     dest: "{{ kickstart_dir }}/{{ item.name }}.ks.cfg"
   loop: "{{ ansible_nodes }}"
 
+- name: Ensure directory for post install setup is present
+  file:
+    path: "{{ post_setup_dir }}"
+    state: directory
+
+- name: Copy authorized_key to for kickstart
+  copy:
+    src: /home/ansible/.ssh/authorized_keys
+    dest: {{ post_setup_dir }}
+    mode: 0644
+    owner: root
+    group: root
+    

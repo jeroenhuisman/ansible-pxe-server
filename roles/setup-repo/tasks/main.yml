@@ -6,7 +6,7 @@
     src: /dev/cdrom
     fstype: iso9660
     opts: ro, noauto
-    state: present
+    state: mounted
 
 - name: Validate installation media
   stat:

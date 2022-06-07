@@ -12,7 +12,7 @@
   - install-configure-http
   - install-configure-tftp
   - install-configure-dhcp
-  - setup-repo
+#  - setup-repo
   - configure-pxe-server
   - regenerate-kickstart
 
